@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Chat con Ollama</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="tituloOllama">CHAT CON OLLAMA</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="chat">
+                    <!--
+                    <p class="User"><b>User:</b> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa voluptatem minima velit inventore laboriosam deserunt, esse quisquam magni ipsa qui sint nisi voluptates laborum repellendus, sapiente officia numquam tenetur quae.</p>
+                    <p class="Bot"><b>Bot:</b> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa voluptatem minima velit inventore laboriosam deserunt, esse quisquam magni ipsa qui sint nisi voluptates laborum repellendus, sapiente officia numquam tenetur quae.</p>
+                    -->
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">Mensaje:</span>
+                    <input id="mensaje" onkeypress="if(event.key === 'Enter') enviarMensaje()" type="text" class="form-control" placeholder="Escribe aquí tu mensaje">
+                    <button class="btn btn-primary" onclick="enviarMensaje()">💬Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        async function enviarMensaje(){
+            const entradaMensaje = document.getElementById("mensaje")
+            const mensaje = entradaMensaje.value
+            entradaMensaje.value = ""
+            console.log(mensaje)            
+            agregarMensaje("User", mensaje)
+
+            const respuesta = await fetch("/chateandoConOllama", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({mensajeUsuario:mensaje})                
+            });
+
+            const data = await respuesta.json()
+            console.log(data)            
+            agregarMensaje("Bot", data.mensajeBot)
+
+
+        }
+
+        function agregarMensaje(clase, mensaje){
+            const chat = document.getElementById("chat")
+            chat.innerHTML += `<p class="${clase}"><b>${clase}:</b>${mensaje}</p>`
+            chat.scrollTop = chat.scrollHeight;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
