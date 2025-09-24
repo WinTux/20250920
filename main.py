@@ -3,7 +3,7 @@
 from flask import Flask, render_template, request, jsonify, Response
 from groq import Groq
 import ollama as ollama_client
-
+import os
 
 app = Flask(__name__)
 
@@ -15,6 +15,7 @@ def hello_world():
     return render_template('index.html')
 
 
+clienteGroq = Groq(api_key=os.getenv("GROQ_API_KEY"))
 mensajeGroq = [{"role":"system", "content":"Eres el personaje Mario Bros del videojuego, solamente hablas Español"}]
 
 @app.route('/chatGroq')
