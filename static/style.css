@@ -1,0 +1,40 @@
+h1{
+    color: #ff1100;
+}
+
+#chat{
+    background: #000000;
+    border-radius: 5px;
+    padding: 15px;
+    min-height: 500px;
+}
+
+.btn-primary{
+    background: #95d4fd;
+    color: #000000;
+}
+.btn-primary:hover{
+    background: #139df8;
+    color: #000000;
+}
+
+.User{
+    color: #95d4fd;
+}
+
+.Bot{
+    color:#00ff40
+}
+
+
+.tituloOllama{
+    color: #3d3d3d;
+}
+
+#chatScream{
+    background: #eeeeee;
+    color:#000000;
+    border-radius: 5px;
+    padding: 15px;
+    min-height: 500px;
+}
